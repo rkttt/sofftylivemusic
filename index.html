@@ -12,94 +12,130 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        body, html {
-            width: 100%;
-            height: 100%;
+        body {
             background-color: #0c0c0c;
             color: #ffffff;
-            overflow-x: hidden;
-        }
-        .app-container {
-            display: flex;
-            width: 100%;
-            min-height: 100vh;
-        }
-        .main-content {
-            flex: 1;
-            background: linear-gradient(to bottom, #1f1f1f, #121212);
             padding: 15px;
-            padding-bottom: 120px;
-            min-height: 100vh;
-            overflow-x: hidden;
+            padding-bottom: 110px;
         }
-        .header {
+        
+        /* 1. Logo & Header */
+        .top-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-        }
-        .usp-badge {
-            background: #1db954;
-            color: #000000;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 12px;
-        }
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
+            justify-content: space-between;
             margin-bottom: 15px;
         }
-        .album-grid {
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1db954;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge {
+            background: #1db954;
+            color: #000000;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* 2. Main Banner Display */
+        .promo-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #1db954 0%, #0d5e29 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .promo-banner h2 {
+            font-size: 18px;
+            margin-bottom: 6px;
+            color: #ffffff;
+        }
+        .promo-banner p {
+            font-size: 12px;
+            color: #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 3. Categories Grid */
+        .category-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            width: 100%;
+            margin-bottom: 25px;
         }
-        .album-card {
-            background-color: #181818;
-            padding: 10px;
+        .cat-card {
+            background: #181818;
             border-radius: 8px;
+            padding: 8px;
+            border: 1px solid #252525;
         }
-        .album-art {
+        .cat-img {
             width: 100%;
             aspect-ratio: 1 / 1;
-            background-color: #252525;
             border-radius: 6px;
-            margin-bottom: 8px;
             overflow: hidden;
-            position: relative;
+            background: #222;
         }
-        .album-art img {
+        .cat-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
-        .album-name {
-            font-size: 13px;
+        .cat-title {
+            font-size: 12px;
             font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 3px;
+            margin-top: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .album-desc {
-            font-size: 10px;
-            color: #b3b3b3;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+
+        /* 4. YouTube Live Window */
+        .youtube-section {
+            margin-bottom: 25px;
         }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid #282828;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* 5. Fixed Bottom Player */
         .player {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 80px;
+            height: 75px;
             background-color: #181818;
             border-top: 1px solid #282828;
             display: flex;
@@ -112,60 +148,67 @@
 </head>
 <body>
 
-    <div class="app-container">
-        <div class="main-content">
-            <div class="header">
-                <div class="usp-badge">SofftyLIVE Music HD - Live Now</div>
+    <!-- 1. Logo Header -->
+    <div class="top-header">
+        <div class="logo">
+            <i class="fa-solid fa-compact-disc"></i> SofftyLIVE HD
+        </div>
+        <div class="badge">OFFICIAL LAUNCH</div>
+    </div>
+
+    <!-- 2. Banner Display -->
+    <div class="promo-banner">
+        <h2>SofftyLIVE Music HD</h2>
+        <p>New Songs & Romantic Melodies Stream Live</p>
+    </div>
+
+    <!-- 3. Categories -->
+    <div class="section-title"><i class="fa-solid fa-list"></i> Music Categories</div>
+    <div class="category-grid">
+        <div class="cat-card">
+            <div class="cat-img">
+                <img src="https://i.postimg.cc/VS971P77/853520220-1386578443466073-7456660932332718580-n-webp.jpg" alt="Official Launch">
             </div>
+            <div class="cat-title">1. Official Launch</div>
+        </div>
 
-            <div class="section-title">Music Categories</div>
-            <div class="album-grid">
-                <!-- 1. Official Launch -->
-                <div class="album-card">
-                    <div class="album-art">
-                        <img src="https://i.postimg.cc/VS971P77/853520220-1386578443466073-7456660932332718580-n-webp.jpg" alt="Official Launch">
-                    </div>
-                    <div class="album-name">1. Official Launch</div>
-                    <div class="album-desc">Sejla Singh Special</div>
-                </div>
-
-                <!-- 2. Romantic Vibes -->
-                <div class="album-card">
-                    <div class="album-art">
-                        <img src="https://i.postimg.cc/cK7DZGD9/859943092-1607281881413505-7529994336343854403-n-webp.jpg" alt="Romantic Vibes">
-                    </div>
-                    <div class="album-name">2. Romantic Vibes</div>
-                    <div class="album-desc">Kannada Dhamaka</div>
-                </div>
-
-                <!-- 3. Very Sad / Breakup -->
-                <div class="album-card">
-                    <div class="album-art">
-                        <img src="https://i.postimg.cc/PLb6hn6K/Meta-AI-870248943-29455266050744839-8959811191056219686-n-20261031-060734-webp.jpg" alt="Very Sad">
-                    </div>
-                    <div class="album-name">3. Very Sad / Breakup</div>
-                    <div class="album-desc">Heartbroken Melodies</div>
-                </div>
-
-                <!-- 4. Desi Bawandar -->
-                <div class="album-card">
-                    <div class="album-art">
-                        <img src="https://i.postimg.cc/R31P9xPL/Meta-AI-877586257-1653538243169385-1567739952289461802-n-20261101-201320-webp.jpg" alt="Desi Bawandar">
-                    </div>
-                    <div class="album-name">4. Desi Bawandar</div>
-                    <div class="album-desc">Golu Molu Group</div>
-                </div>
+        <div class="cat-card">
+            <div class="cat-img">
+                <img src="https://i.postimg.cc/cK7DZGD9/859943092-1607281881413505-7529994336343854403-n-webp.jpg" alt="Romantic Vibes">
             </div>
+            <div class="cat-title">2. Romantic Vibes</div>
+        </div>
+
+        <div class="cat-card">
+            <div class="cat-img">
+                <img src="https://i.postimg.cc/PLb6hn6K/Meta-AI-870248943-29455266050744839-8959811191056219686-n-20261031-060734-webp.jpg" alt="Very Sad">
+            </div>
+            <div class="cat-title">3. Very Sad / Breakup</div>
+        </div>
+
+        <div class="cat-card">
+            <div class="cat-img">
+                <img src="https://i.postimg.cc/R31P9xPL/Meta-AI-877586257-1653538243169385-1567739952289461802-n-20261101-201320-webp.jpg" alt="Desi Bawandar">
+            </div>
+            <div class="cat-title">4. Desi Bawandar</div>
         </div>
     </div>
 
-    <!-- Player -->
+    <!-- 4. YouTube Live Window -->
+    <div class="section-title"><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Live Streaming</div>
+    <div class="youtube-section">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/VZhAQ961zTA" title="YouTube video player" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- 5. Bottom Player -->
     <div class="player">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 38px; height: 38px; background: #252525; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #1db954;"><i class="fa-solid fa-compact-disc"></i></div>
+            <div style="width: 38px; height: 38px; background: #252525; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #1db954;"><i class="fa-solid fa-music"></i></div>
             <div>
-                <div style="font-size: 12px; font-weight: bold; color: #fff;">Google ka Pyar</div>
-                <div style="font-size: 10px; color: #b3b3b3;">SofftyLIVE</div>
+                <div style="font-size: 12px; font-weight: bold; color: #fff;">Har Khwab Cheekh Raha Hai</div>
+                <div style="font-size: 10px; color: #b3b3b3;">SofftyLIVE Music</div>
             </div>
         </div>
         <div style="display: flex; gap: 15px; font-size: 18px; color: #fff;">
