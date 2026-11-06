@@ -15,11 +15,16 @@
             --accent: #00ffcc;
         }
 
+        /* Prevent Text & Media Selection */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         body {
@@ -50,9 +55,6 @@
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .tagline {
@@ -62,27 +64,31 @@
             padding-left: 10px;
         }
 
-        /* 4. Moving Banner (Marquee) */
-        .marquee-container {
-            background: linear-gradient(90deg, #111, var(--card-bg), #111);
-            border-bottom: 1px solid rgba(255, 51, 102, 0.3);
+        /* Blockbuster Marquee Banner */
+        .marquee-wrapper {
+            background: linear-gradient(90deg, #ff3366, #7928ca, #ff3366);
+            color: #ffffff;
             overflow: hidden;
             white-space: nowrap;
-            padding: 10px 0;
+            padding: 12px 0;
+            box-shadow: 0 4px 15px rgba(255, 51, 102, 0.4);
+            border-bottom: 2px solid var(--accent);
         }
 
-        .marquee-text {
+        .marquee-content {
             display: inline-block;
+            white-space: nowrap;
             padding-left: 100%;
-            animation: marquee 25s linear infinite;
-            font-weight: 600;
-            color: var(--accent);
-            font-size: 0.95rem;
+            animation: scroll-left 20s linear infinite;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        @keyframes marquee {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100%, 0); }
+        @keyframes scroll-left {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
         }
 
         /* Main Container Layout */
@@ -98,19 +104,16 @@
         }
 
         @media (max-width: 968px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
+            .container { grid-template-columns: 1fr; }
         }
 
-        /* Left Main Panel */
         .main-panel {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* 2. Audio Player Component */
+        /* Secured Audio Player Component */
         .audio-player-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -121,12 +124,6 @@
             gap: 15px;
         }
 
-        .player-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         .now-playing h3 {
             font-size: 1.1rem;
             color: var(--text-main);
@@ -134,7 +131,8 @@
 
         .now-playing p {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--accent);
+            margin-top: 4px;
         }
 
         audio {
@@ -143,7 +141,18 @@
             outline: none;
         }
 
-        /* 1. Song List / Playlist */
+        /* Hide download button in WebKit browsers */
+        audio::-internal-media-controls-download-button {
+            display: none;
+        }
+        audio::-webkit-media-controls-enclosure {
+            overflow: hidden;
+        }
+        audio::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+
+        /* Playlist Section */
         .playlist-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -161,35 +170,61 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .song-item {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 14px;
+            flex-direction: column;
+            gap: 8px;
+            padding: 14px 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 8px;
             cursor: pointer;
             transition: 0.2s ease;
+            border-left: 3px solid transparent;
         }
 
         .song-item:hover {
             background: rgba(255, 51, 102, 0.15);
+            border-left-color: var(--primary);
+        }
+
+        .song-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .song-title {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
         }
 
-        .song-meta {
+        .song-category {
             font-size: 0.75rem;
-            color: var(--text-muted);
+            background: rgba(0, 255, 204, 0.15);
+            color: var(--accent);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
         }
 
-        /* 3. Live Social Windows */
+        .language-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .lang-tag {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* Social Windows */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -197,9 +232,7 @@
         }
 
         @media (max-width: 768px) {
-            .social-grid {
-                grid-template-columns: 1fr;
-            }
+            .social-grid { grid-template-columns: 1fr; }
         }
 
         .social-box {
@@ -210,22 +243,9 @@
             text-align: center;
         }
 
-        .social-box h4 {
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .social-box.youtube h4 { color: #ff0000; }
-        .social-box.instagram h4 { color: #e1306c; }
-        .social-box.twitter h4 { color: #1da1f2; }
-
         .social-preview {
             background: var(--bg-dark);
-            height: 120px;
+            height: 100px;
             border-radius: 8px;
             display: flex;
             flex-direction: column;
@@ -233,7 +253,6 @@
             align-items: center;
             font-size: 0.8rem;
             color: var(--text-muted);
-            border: 1px dashed rgba(255, 255, 255, 0.1);
         }
 
         .social-preview a {
@@ -243,7 +262,7 @@
             font-weight: bold;
         }
 
-        /* Sidebar / Live Chat */
+        /* Chat Sidebar */
         .chat-sidebar {
             background: var(--card-bg);
             border-radius: 12px;
@@ -259,7 +278,6 @@
             font-weight: bold;
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
 
         .chat-messages {
@@ -271,10 +289,7 @@
             gap: 12px;
         }
 
-        .chat-line {
-            font-size: 0.88rem;
-            line-height: 1.4;
-        }
+        .chat-line { font-size: 0.88rem; }
 
         .chat-user {
             font-weight: bold;
@@ -297,6 +312,8 @@
             border-radius: 8px;
             color: white;
             outline: none;
+            -webkit-user-select: text;
+            user-select: text;
         }
 
         .chat-input-area button {
@@ -319,92 +336,131 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <!-- Header -->
     <header>
-        <div class="brand-logo">
-            SofftyLIVE Music HD
-        </div>
-        <div class="tagline">
-            Emotions Ka Taj Mahal - Lucknow
-        </div>
+        <div class="brand-logo">SofftyLIVE Music HD</div>
+        <div class="tagline">Emotions Ka Taj Mahal - Lucknow</div>
     </header>
 
-    <!-- Moving Marquee Banner -->
-    <div class="marquee-container">
-        <div class="marquee-text">
-            🔥 BLOCKBUSTER RELEASE OF THE DAY: "Happy Dhanteras Special 2026 - Tech-Desi Fusion" OUT NOW! || 🚀 NEXT DROP COMING TOMORROW AT 10 AM || 🎶 SOFFTYLIVE MUSIC HD - DISCOVER THE BEST BHOJPURI & DESI BEATS 🔥
+    <!-- Blockbuster Moving Banner -->
+    <div class="marquee-wrapper">
+        <div class="marquee-content">
+            🔒 PROTECTED STREAMING &nbsp;&nbsp;&nbsp;&nbsp; 🔥 ALL-LANGUAGE MULTI-GENRE DROPS OUT NOW! &nbsp;&nbsp;&nbsp;&nbsp; 🎶 SOFFTYLIVE MUSIC HD 🔥
         </div>
     </div>
 
-    <!-- Content -->
+    <!-- Main Container -->
     <div class="container">
-        <!-- Main Content -->
         <div class="main-panel">
             
-            <!-- Audio Player -->
+            <!-- Protected Audio Player -->
             <div class="audio-player-card">
                 <div class="player-info">
                     <div class="now-playing">
-                        <h3 id="currentSongTitle">Dhanteras Special Tech-Desi Fusion</h3>
-                        <p id="currentArtist">SofftyLIVE Music • Festive Track</p>
+                        <h3 id="currentSongTitle">Tech World Chhamchham (Title Track)</h3>
+                        <p id="currentArtist">Category: Tech World Chhamchham • Protected Playback</p>
                     </div>
                 </div>
-                <audio id="mainAudioControls" controls>
+                <!-- controlsList="nodownload" disables standard download options -->
+                <audio id="mainAudioControls" controls controlsList="nodownload" oncontextmenu="return false;">
                     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
+                    Browser does not support protected audio.
                 </audio>
             </div>
 
-            <!-- Song List / Playlist -->
+            <!-- Playlist -->
             <div class="playlist-card">
-                <h3>🎵 Official Album Catalogue (10 Track Preview)</h3>
+                <h3>🎵 Secured Catalogue (Protected Stream)</h3>
                 <ul class="song-list">
-                    <li class="song-item" onclick="playTrack('Dhanteras Special Tech-Desi Fusion', 'SofftyLIVE Music')">
-                        <span class="song-title">1. Happy Dhanteras Special 2026</span>
-                        <span class="song-meta">Bhojpuri Pop • 03:15</span>
+                    <li class="song-item" onclick="playTrack('Tech World Chhamchham', 'Tech World Chhamchham', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
+                        <div class="song-header">
+                            <span class="song-title">1. Tech World Chhamchham</span>
+                            <span class="song-category">Tech World Chhamchham</span>
+                        </div>
+                        <div class="language-tags">
+                            <span class="lang-tag">🌐 All Languages</span>
+                            <span class="lang-tag">Bhojpuri</span>
+                            <span class="lang-tag">Hindi</span>
+                            <span class="lang-tag">Tech-Fusion</span>
+                        </div>
                     </li>
-                    <li class="song-item" onclick="playTrack('Lucknowi Emotion Drop', 'SofftyLIVE Music')">
-                        <span class="song-title">2. Lucknowi Emotion Drop</span>
-                        <span class="song-meta">Romantic Ballad • 04:02</span>
+
+                    <li class="song-item" onclick="playTrack('Romantic Trigger (Dil Ka Connection)', 'Romantic Trigger', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
+                        <div class="song-header">
+                            <span class="song-title">2. Romantic Trigger (Dil Ka Connection)</span>
+                            <span class="song-category">Romantic Trigger</span>
+                        </div>
+                        <div class="language-tags">
+                            <span class="lang-tag">🌐 All Languages</span>
+                            <span class="lang-tag">Hindi</span>
+                            <span class="lang-tag">Bhojpuri Romantic</span>
+                        </div>
                     </li>
-                    <li class="song-item" onclick="playTrack('Silicon Valley Acoustic Dholak', 'SofftyLIVE Music')">
-                        <span class="song-title">3. Silicon Valley Acoustic Dholak</span>
-                        <span class="song-meta">Tech Desi Fusion • 03:45</span>
+
+                    <li class="song-item" onclick="playTrack('Breakup Storm (Dil Toota Network Out)', 'Breakup Storm', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+                        <div class="song-header">
+                            <span class="song-title">3. Breakup Storm (Dil Toota Network Out)</span>
+                            <span class="song-category">Breakup Storm</span>
+                        </div>
+                        <div class="language-tags">
+                            <span class="lang-tag">🌐 All Languages</span>
+                            <span class="lang-tag">Bhojpuri Sad</span>
+                            <span class="lang-tag">Hindi Heartbreak</span>
+                        </div>
                     </li>
-                    <li class="song-item" onclick="playTrack('Desi Bass Dropper', 'SofftyLIVE Music')">
-                        <span class="song-title">4. Desi Bass Dropper</span>
-                        <span class="song-meta">High-Energy Pop • 03:30</span>
+
+                    <li class="song-item" onclick="playTrack('Shootout Melody (Lucknow Underworld)', 'Shootout Melody', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
+                        <div class="song-header">
+                            <span class="song-title">4. Shootout Melody (Lucknow Underworld)</span>
+                            <span class="song-category">Shootout Melody</span>
+                        </div>
+                        <div class="language-tags">
+                            <span class="lang-tag">🌐 All Languages</span>
+                            <span class="lang-tag">Hindi Attitude</span>
+                            <span class="lang-tag">Lucknowi Rap</span>
+                        </div>
+                    </li>
+
+                    <li class="song-item" onclick="playTrack('Desi Bawandar (High-Energy Fun)', 'Desi Bawandar', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3')">
+                        <div class="song-header">
+                            <span class="song-title">5. Desi Bawandar (High-Energy Fun)</span>
+                            <span class="song-category">Desi Bawandar</span>
+                        </div>
+                        <div class="language-tags">
+                            <span class="lang-tag">🌐 All Languages</span>
+                            <span class="lang-tag">Bhojpuri Pop</span>
+                            <span class="lang-tag">Desi Party</span>
+                        </div>
                     </li>
                 </ul>
             </div>
 
-            <!-- Social Live Windows -->
+            <!-- Social Media Windows -->
             <div class="social-grid">
-                <div class="social-box youtube">
-                    <h4>YouTube Live Feed</h4>
+                <div class="social-box">
+                    <h4 style="color: #ff0000;">YouTube Feed</h4>
                     <div class="social-preview">
-                        <span>YouTube Shorts & Videos</span>
+                        <span>Shorts & Videos</span>
                         <a href="https://youtube.com/@sofftylive" target="_blank">@sofftylive</a>
                     </div>
                 </div>
-                <div class="social-box instagram">
-                    <h4>Instagram Reels</h4>
+                <div class="social-box">
+                    <h4 style="color: #e1306c;">Instagram Feed</h4>
                     <div class="social-preview">
-                        <span>Latest Reels & Updates</span>
+                        <span>Latest Reels</span>
                         <a href="https://instagram.com/sofftylive" target="_blank">@sofftylive</a>
                     </div>
                 </div>
-                <div class="social-box twitter">
-                    <h4>Twitter (X) Feed</h4>
+                <div class="social-box">
+                    <h4 style="color: #1da1f2;">Twitter (X) Feed</h4>
                     <div class="social-preview">
-                        <span>Latest Announcements</span>
+                        <span>Announcements</span>
                         <a href="https://x.com/sofftylive" target="_blank">@sofftylive</a>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- Right Chat Panel -->
@@ -414,8 +470,7 @@
                 <span style="font-size: 0.8rem; color: #00ffcc;">● Live</span>
             </div>
             <div class="chat-messages" id="chatBox">
-                <div class="chat-line"><span class="chat-user">SofftyOfficial:</span> Welcome to SofftyLIVE Music HD! ✨</div>
-                <div class="chat-line"><span class="chat-user">Lucknow_Fan:</span> Kya solid player setup hai bhai! 🔥</div>
+                <div class="chat-line"><span class="chat-user">SofftyOfficial:</span> Protected Player Enabled! ✨</div>
             </div>
             <div class="chat-input-area">
                 <input type="text" id="msgInput" placeholder="Send a message..." onkeypress="checkEnter(event)">
@@ -430,6 +485,16 @@
     </footer>
 
     <script>
+        // Disable Keyboard Inspection Shortcuts
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false; // Block F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U (View Source)
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; // Ctrl+S (Save Page)
+        };
+
         function sendMsg() {
             const input = document.getElementById('msgInput');
             const chatBox = document.getElementById('chatBox');
@@ -447,10 +512,11 @@
             if (e.key === 'Enter') sendMsg();
         }
 
-        function playTrack(title, artist) {
+        function playTrack(title, category, url) {
             document.getElementById('currentSongTitle').innerText = title;
-            document.getElementById('currentArtist').innerText = artist + ' • Playing Now';
+            document.getElementById('currentArtist').innerText = 'Category: ' + category + ' • Stream Locked';
             const audio = document.getElementById('mainAudioControls');
+            audio.src = url;
             audio.play();
         }
     </script>
