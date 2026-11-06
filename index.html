@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SofftyLIVE Music HD | Emotions Ka Taj Mahal - Lucknow</title>
     <style>
         :root {
-            --primary-color: #ff3366;
-            --secondary-color: #7928ca;
-            --dark-bg: #0f111a;
+            --primary: #ff3366;
+            --secondary: #7928ca;
+            --bg-dark: #0f111a;
             --card-bg: #1a1d29;
-            --text-color: #ffffff;
+            --text-main: #ffffff;
             --text-muted: #a0aec0;
+            --accent: #00ffcc;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Header Navigation */
+        /* Header */
         header {
             background: rgba(15, 17, 26, 0.95);
             backdrop-filter: blur(10px);
@@ -43,173 +44,277 @@
             z-index: 1000;
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-container h1 {
+        .brand-logo {
             font-size: 1.5rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .wallet-badge {
-            background: var(--card-bg);
-            border: 1px solid var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: bold;
         }
 
-        .wallet-badge span {
-            color: #ffd700;
+        .tagline {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-left: 2px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        /* 4. Moving Banner (Marquee) */
+        .marquee-container {
+            background: linear-gradient(90deg, #111, var(--card-bg), #111);
+            border-bottom: 1px solid rgba(255, 51, 102, 0.3);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
         }
 
         /* Main Container Layout */
-        .main-container {
+        .container {
             display: grid;
-            grid-template-columns: 1fr 350px;
+            grid-template-columns: 1fr 360px;
             gap: 20px;
             padding: 20px;
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
             width: 100%;
             flex: 1;
         }
 
         @media (max-width: 968px) {
-            .main-container {
+            .container {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Streaming Section */
-        .stream-section {
+        /* Left Main Panel */
+        .main-panel {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        .video-player-box {
+        /* 2. Audio Player Component */
+        .audio-player-card {
             background: var(--card-bg);
             border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .now-playing h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .now-playing p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        audio {
+            width: 100%;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        /* 1. Song List / Playlist */
+        .playlist-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .playlist-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .song-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .song-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .song-item:hover {
+            background: rgba(255, 51, 102, 0.15);
+        }
+
+        .song-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .song-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* 3. Live Social Windows */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .social-box {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .social-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .social-box.youtube h4 { color: #ff0000; }
+        .social-box.instagram h4 { color: #e1306c; }
+        .social-box.twitter h4 { color: #1da1f2; }
+
+        .social-preview {
+            background: var(--bg-dark);
+            height: 120px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .video-placeholder {
-            text-align: center;
+            font-size: 0.8rem;
             color: var(--text-muted);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
         }
 
-        .video-placeholder h3 {
-            color: var(--text-color);
-            margin-bottom: 5px;
+        .social-preview a {
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 6px;
+            font-weight: bold;
         }
 
-        .stream-info {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stream-info h2 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-        }
-
-        .stream-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Chat & Interaction Sidebar */
-        .sidebar {
+        /* Sidebar / Live Chat */
+        .chat-sidebar {
             background: var(--card-bg);
             border-radius: 12px;
             display: flex;
             flex-direction: column;
-            height: 600px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            overflow: hidden;
+            height: 620px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .sidebar-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .chat-header {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .chat-messages {
             flex: 1;
-            padding: 15px;
+            padding: 16px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .chat-msg {
-            font-size: 0.9rem;
+        .chat-line {
+            font-size: 0.88rem;
             line-height: 1.4;
         }
 
-        .chat-msg .username {
+        .chat-user {
             font-weight: bold;
-            color: var(--primary-color);
+            color: var(--primary);
             margin-right: 6px;
         }
 
-        .chat-input-box {
-            padding: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .chat-input-area {
+            padding: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .chat-input-box input {
+        .chat-input-area input {
             flex: 1;
-            background: var(--dark-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 15px;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px 14px;
             border-radius: 8px;
-            color: var(--text-color);
+            color: white;
             outline: none;
         }
 
-        .chat-input-box input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .chat-input-box button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        .chat-input-area button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             border: none;
             color: white;
-            padding: 0 20px;
+            padding: 0 16px;
             border-radius: 8px;
-            cursor: pointer;
             font-weight: bold;
+            cursor: pointer;
         }
 
-        /* Footer */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 16px;
             color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             margin-top: auto;
         }
     </style>
@@ -218,70 +323,135 @@
 
     <!-- Header -->
     <header>
-        <div class="logo-container">
-            <h1>SofftyLIVE Music HD</h1>
+        <div class="brand-logo">
+            SofftyLIVE Music HD
         </div>
-        <div class="wallet-badge">
-            🪙 Gemini Coins: <span id="coin-balance">500</span>
+        <div class="tagline">
+            Emotions Ka Taj Mahal - Lucknow
         </div>
     </header>
 
-    <!-- Main Section -->
-    <div class="main-container">
-        <!-- Left: Video & Details -->
-        <div class="stream-section">
-            <div class="video-player-box">
-                <div class="video-placeholder">
-                    <h3>SofftyLIVE HD Stream Live</h3>
-                    <p>Emotions Ka Taj Mahal - Lucknow</p>
+    <!-- Moving Marquee Banner -->
+    <div class="marquee-container">
+        <div class="marquee-text">
+            🔥 BLOCKBUSTER RELEASE OF THE DAY: "Happy Dhanteras Special 2026 - Tech-Desi Fusion" OUT NOW! || 🚀 NEXT DROP COMING TOMORROW AT 10 AM || 🎶 SOFFTYLIVE MUSIC HD - DISCOVER THE BEST BHOJPURI & DESI BEATS 🔥
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-panel">
+            
+            <!-- Audio Player -->
+            <div class="audio-player-card">
+                <div class="player-info">
+                    <div class="now-playing">
+                        <h3 id="currentSongTitle">Dhanteras Special Tech-Desi Fusion</h3>
+                        <p id="currentArtist">SofftyLIVE Music • Festive Track</p>
+                    </div>
+                </div>
+                <audio id="mainAudioControls" controls>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <!-- Song List / Playlist -->
+            <div class="playlist-card">
+                <h3>🎵 Official Album Catalogue (10 Track Preview)</h3>
+                <ul class="song-list">
+                    <li class="song-item" onclick="playTrack('Dhanteras Special Tech-Desi Fusion', 'SofftyLIVE Music')">
+                        <span class="song-title">1. Happy Dhanteras Special 2026</span>
+                        <span class="song-meta">Bhojpuri Pop • 03:15</span>
+                    </li>
+                    <li class="song-item" onclick="playTrack('Lucknowi Emotion Drop', 'SofftyLIVE Music')">
+                        <span class="song-title">2. Lucknowi Emotion Drop</span>
+                        <span class="song-meta">Romantic Ballad • 04:02</span>
+                    </li>
+                    <li class="song-item" onclick="playTrack('Silicon Valley Acoustic Dholak', 'SofftyLIVE Music')">
+                        <span class="song-title">3. Silicon Valley Acoustic Dholak</span>
+                        <span class="song-meta">Tech Desi Fusion • 03:45</span>
+                    </li>
+                    <li class="song-item" onclick="playTrack('Desi Bass Dropper', 'SofftyLIVE Music')">
+                        <span class="song-title">4. Desi Bass Dropper</span>
+                        <span class="song-meta">High-Energy Pop • 03:30</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Social Live Windows -->
+            <div class="social-grid">
+                <div class="social-box youtube">
+                    <h4>YouTube Live Feed</h4>
+                    <div class="social-preview">
+                        <span>YouTube Shorts & Videos</span>
+                        <a href="https://youtube.com/@sofftylive" target="_blank">@sofftylive</a>
+                    </div>
+                </div>
+                <div class="social-box instagram">
+                    <h4>Instagram Reels</h4>
+                    <div class="social-preview">
+                        <span>Latest Reels & Updates</span>
+                        <a href="https://instagram.com/sofftylive" target="_blank">@sofftylive</a>
+                    </div>
+                </div>
+                <div class="social-box twitter">
+                    <h4>Twitter (X) Feed</h4>
+                    <div class="social-preview">
+                        <span>Latest Announcements</span>
+                        <a href="https://x.com/sofftylive" target="_blank">@sofftylive</a>
+                    </div>
                 </div>
             </div>
-            <div class="stream-info">
-                <h2>Festive Special & High-Energy Desi Beats 🎶</h2>
-                <p>Welcome to the ultimate official music and live streaming experience. Enjoy original lyrics, traditional dholak rhythms, and global tech vibes curated exclusively by SofftyLIVE.</p>
-            </div>
+
         </div>
 
-        <!-- Right: Live Chat -->
-        <div class="sidebar">
-            <div class="sidebar-header">Live Stream Chat</div>
-            <div class="chat-messages" id="chat-box">
-                <div class="chat-msg"><span class="username">SofftyOfficial:</span> Welcome everyone to SofftyLIVE Music HD! ✨</div>
-                <div class="chat-msg"><span class="username">Rahul_Lucknow:</span> Zabaradst vibe hai bhai! 🔥</div>
-                <div class="chat-msg"><span class="username">Priya_Music:</span> Happy Dhanteras 2026 to all! 🪙</div>
+        <!-- Right Chat Panel -->
+        <div class="chat-sidebar">
+            <div class="chat-header">
+                <span>Live Audience Chat</span>
+                <span style="font-size: 0.8rem; color: #00ffcc;">● Live</span>
             </div>
-            <div class="chat-input-box">
-                <input type="text" id="user-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()">Send</button>
+            <div class="chat-messages" id="chatBox">
+                <div class="chat-line"><span class="chat-user">SofftyOfficial:</span> Welcome to SofftyLIVE Music HD! ✨</div>
+                <div class="chat-line"><span class="chat-user">Lucknow_Fan:</span> Kya solid player setup hai bhai! 🔥</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="msgInput" placeholder="Send a message..." onkeypress="checkEnter(event)">
+                <button onclick="sendMsg()">Send</button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        &copy; 2026 SofftyLIVE Music. All Rights Reserved. Powered by Rajesh Tewari.
+        &copy; 2026 SofftyLIVE Music. All Rights Reserved. Created by Rajesh Tewari.
     </footer>
 
     <script>
-        function sendMessage() {
-            const input = document.getElementById('user-input');
-            const chatBox = document.getElementById('chat-box');
-            
+        function sendMsg() {
+            const input = document.getElementById('msgInput');
+            const chatBox = document.getElementById('chatBox');
             if (input.value.trim() !== '') {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = 'chat-msg';
-                msgDiv.innerHTML = `<span class="username" style="color: #00ffcc;">You:</span> ${input.value}`;
-                chatBox.appendChild(msgDiv);
-                
+                const line = document.createElement('div');
+                line.className = 'chat-line';
+                line.innerHTML = `<span class="chat-user" style="color: #00ffcc;">You:</span> ${input.value}`;
+                chatBox.appendChild(line);
                 input.value = '';
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
 
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
+        function checkEnter(e) {
+            if (e.key === 'Enter') sendMsg();
+        }
+
+        function playTrack(title, artist) {
+            document.getElementById('currentSongTitle').innerText = title;
+            document.getElementById('currentArtist').innerText = artist + ' • Playing Now';
+            const audio = document.getElementById('mainAudioControls');
+            audio.play();
         }
     </script>
 </body>
