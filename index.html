@@ -2,129 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SofftyLIVE Music HD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Soffty Live Music HD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         body {
-            background-color: #0c0c0c;
+            background-color: #0b0b0b;
             color: #ffffff;
-            padding: 15px;
-            padding-bottom: 120px;
+            padding: 12px;
+            padding-bottom: 90px;
         }
-        
-        /* Header */
-        .top-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+        .header {
+            text-align: center;
+            padding: 15px 0;
             border-bottom: 1px solid #1f1f1f;
+            margin-bottom: 15px;
         }
-        .logo {
+        .header h1 {
             font-size: 20px;
             font-weight: 800;
             color: #1db954;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        .badge {
-            background: #1db954;
-            color: #000000;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        /* Promo Banner */
-        .promo-banner {
-            width: 100%;
-            background: linear-gradient(135deg, #1db954 0%, #0d5e29 100%);
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        }
-        .promo-banner h2 {
-            font-size: 18px;
-            margin-bottom: 4px;
-            color: #ffffff;
-        }
-        .promo-banner p {
-            font-size: 12px;
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin: 15px 0 10px 0;
             color: #e0e0e0;
         }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* 4 Categories Grid */
+        /* 5 Categories Grid */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 20px;
         }
         .cat-card {
             background: #181818;
             border-radius: 8px;
-            padding: 10px;
-            border: 1px solid #252525;
-            text-align: center;
+            padding: 8px;
+            border: 1px solid #222;
         }
         .cat-img {
             width: 100%;
             aspect-ratio: 1 / 1;
             border-radius: 6px;
             overflow: hidden;
-            background: #222;
+            background: #202020;
         }
         .cat-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
-        .cat-title {
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 8px;
+        .cat-name {
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+            text-align: center;
             color: #fff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        /* YouTube Live Window */
-        .youtube-section {
-            margin-bottom: 25px;
-        }
-        .video-container {
+        /* YouTube Single Window */
+        .youtube-box {
             position: relative;
+            width: 100%;
             padding-bottom: 56.25%;
             height: 0;
+            border-radius: 8px;
             overflow: hidden;
-            border-radius: 10px;
-            border: 1px solid #282828;
             background: #000;
+            border: 1px solid #222;
+            margin-bottom: 20px;
         }
-        .video-container iframe {
+        .youtube-box iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -132,37 +91,36 @@
             height: 100%;
             border: 0;
         }
-
         /* Fixed Bottom Player */
         .player {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 75px;
-            background-color: #181818;
+            height: 65px;
+            background-color: #121212;
             border-top: 1px solid #282828;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 15px;
-            z-index: 99999;
+            z-index: 9999;
         }
-        .track-info {
+        .player-info {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .track-title {
+        .player-title {
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
             color: #fff;
         }
-        .track-artist {
+        .player-sub {
             font-size: 10px;
-            color: #b3b3b3;
+            color: #888;
         }
-        .controls {
+        .player-controls {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -173,72 +131,68 @@
 </head>
 <body>
 
-    <!-- 1. Header -->
-    <div class="top-header">
-        <div class="logo">
-            <i class="fa-solid fa-compact-disc"></i> SofftyLIVE HD
-        </div>
-        <div class="badge">LIVE MUSIC HD</div>
+    <!-- 1. Header Name -->
+    <div class="header">
+        <h1>Soffty Live Music HD</h1>
     </div>
 
-    <!-- 2. Banner -->
-    <div class="promo-banner">
-        <h2>SofftyLIVE Music HD</h2>
-        <p>Official Release & Streaming Platform</p>
-    </div>
-
-    <!-- 3. Categories -->
-    <div class="section-title"><i class="fa-solid fa-list"></i> Music Albums</div>
+    <!-- 2. 5 Categories of Songs -->
+    <div class="section-title"><i class="fa-solid fa-list-music"></i> Song Categories (5)</div>
     <div class="category-grid">
         <div class="cat-card">
             <div class="cat-img">
-                <img src="https://i.postimg.cc/VS971P77/853520220-1386578443466073-7456660932332718580-n-webp.jpg" alt="Official Launch">
+                <img src="https://i.postimg.cc/VS971P77/853520220-1386578443466073-7456660932332718580-n-webp.jpg" alt="Official">
             </div>
-            <div class="cat-title">1. Official Launch</div>
+            <div class="cat-name">1. Official Launch</div>
         </div>
 
         <div class="cat-card">
             <div class="cat-img">
-                <img src="https://i.postimg.cc/cK7DZGD9/859943092-1607281881413505-7529994336343854403-n-webp.jpg" alt="Romantic Vibes">
+                <img src="https://i.postimg.cc/cK7DZGD9/859943092-1607281881413505-7529994336343854403-n-webp.jpg" alt="Romantic">
             </div>
-            <div class="cat-title">2. Romantic Vibes</div>
+            <div class="cat-name">2. Romantic Hits</div>
         </div>
 
         <div class="cat-card">
             <div class="cat-img">
-                <img src="https://i.postimg.cc/PLb6hn6K/Meta-AI-870248943-29455266050744839-8959811191056219686-n-20261031-060734-webp.jpg" alt="Very Sad">
+                <img src="https://i.postimg.cc/PLb6hn6K/Meta-AI-870248943-29455266050744839-8959811191056219686-n-20261031-060734-webp.jpg" alt="Sad">
             </div>
-            <div class="cat-title">3. Very Sad / Breakup</div>
+            <div class="cat-name">3. Sad / Breakup</div>
         </div>
 
         <div class="cat-card">
             <div class="cat-img">
-                <img src="https://i.postimg.cc/R31P9xPL/Meta-AI-877586257-1653538243169385-1567739952289461802-n-20261101-201320-webp.jpg" alt="Desi Bawandar">
+                <img src="https://i.postimg.cc/R31P9xPL/Meta-AI-877586257-1653538243169385-1567739952289461802-n-20261101-201320-webp.jpg" alt="Desi">
             </div>
-            <div class="cat-title">4. Desi Bawandar</div>
+            <div class="cat-name">4. Desi Bawandar</div>
+        </div>
+
+        <div class="cat-card" style="grid-column: span 2;">
+            <div class="cat-img" style="aspect-ratio: 16 / 5;">
+                <img src="https://i.postimg.cc/VS971P77/853520220-1386578443466073-7456660932332718580-n-webp.jpg" alt="Special">
+            </div>
+            <div class="cat-name">5. Special Bhojpuri Mix</div>
         </div>
     </div>
 
-    <!-- 4. YouTube Live Window -->
-    <div class="section-title"><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Official Stream</div>
-    <div class="youtube-section">
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/VZhAQ961zTA" title="YouTube video player" allowfullscreen></iframe>
-        </div>
+    <!-- 3. Single YouTube Reel Window -->
+    <div class="section-title"><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> YouTube Reel Feed</div>
+    <div class="youtube-box">
+        <iframe src="https://www.youtube.com/embed/VZhAQ961zTA" title="YouTube video player" allowfullscreen></iframe>
     </div>
 
-    <!-- 5. Fixed Bottom Player -->
+    <!-- 4. Niche Bottom Player -->
     <div class="player">
-        <div class="track-info">
-            <div style="width: 38px; height: 38px; background: #252525; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #1db954;"><i class="fa-solid fa-music"></i></div>
+        <div class="player-info">
+            <div style="width: 35px; height: 35px; background: #202020; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #1db954;"><i class="fa-solid fa-music"></i></div>
             <div>
-                <div class="track-title" id="current-song">Har Khwab Cheekh Raha Hai</div>
-                <div class="track-artist">SofftyLIVE HD</div>
+                <div class="player-title">Har Khwab Cheekh Raha Hai</div>
+                <div class="player-sub">Soffty Live Music</div>
             </div>
         </div>
-        <div class="controls">
+        <div class="player-controls">
             <i class="fa-solid fa-backward-step"></i>
-            <i class="fa-solid fa-circle-play" style="font-size: 24px; color: #1db954;"></i>
+            <i class="fa-solid fa-circle-play" style="font-size: 22px; color: #1db954;"></i>
             <i class="fa-solid fa-forward-step"></i>
         </div>
     </div>
