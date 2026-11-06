@@ -1,44 +1,179 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10091f">
-<title>SOFFTY LIVE MUSIC HD</title>
-<style>
-:root{--bg:#0b0714;--panel:#171027;--pink:#ff3fa4;--purple:#9b5cff;--muted:#b9aecb;--white:#fff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#351052 0,transparent 36%),var(--bg);color:var(--white);font-family:Arial, sans-serif}
-header{padding:18px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff18;position:sticky;top:0;background:#10091fee;backdrop-filter:blur(12px);z-index:5}
-.brand{font-weight:900;letter-spacing:1px;font-size:19px}.brand span{color:var(--pink)}nav a{color:#eee;text-decoration:none;margin-left:18px;font-size:14px}
-main{max-width:1100px;margin:auto;padding:28px 5% 70px}.hero{padding:48px 28px;border:1px solid #ffffff20;border-radius:25px;background:linear-gradient(120deg,#28113f,#171027 65%,#3b123c);box-shadow:0 18px 60px #0007}
-.tag{color:#ff8ac7;font-size:12px;letter-spacing:3px;font-weight:bold}.hero h1{font-size:clamp(32px,7vw,58px);margin:12px 0}.hero h1 span{color:#ff55b0}.hero p{color:var(--muted);max-width:620px;line-height:1.7}.btn{border:0;border-radius:30px;padding:12px 19px;background:linear-gradient(90deg,var(--purple),var(--pink));color:white;font-weight:bold;cursor:pointer}
-section{margin-top:34px}.section-head{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}h2{font-size:23px;margin:0 0 16px}.tools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}input,select{background:#171027;color:white;border:1px solid #ffffff2a;border-radius:12px;padding:11px;min-width:150px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{background:var(--panel);border:1px solid #ffffff18;border-radius:17px;padding:16px}.cover{height:125px;border-radius:12px;background:linear-gradient(135deg,#59237b,#ed3999);display:grid;place-items:center;font-size:40px;margin-bottom:12px}.muted{color:var(--muted);font-size:13px}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #ffffff35;border-radius:15px}
-.player{position:sticky;bottom:10px;background:#211433f2;border:1px solid #ffffff25;border-radius:16px;padding:13px;margin-top:25px;backdrop-filter:blur(12px)}audio{width:100%;margin-top:8px}
-details{background:var(--panel);padding:16px;border-radius:15px;border:1px solid #ffffff20}summary{cursor:pointer;font-weight:bold}.note{color:#ffcfeb;font-size:13px;line-height:1.6}
-footer{text-align:center;color:var(--muted);padding:25px;border-top:1px solid #ffffff18;font-size:13px}
-@media(max-width:600px){nav a{margin-left:9px;font-size:12px}.hero{padding:32px 20px}.brand{font-size:15px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SofftyLIVE Music HD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #0c0c0c;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .app-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+        .main-content {
+            flex: 1;
+            background: linear-gradient(to bottom, #1f1f1f, #121212);
+            padding: 15px;
+            padding-bottom: 120px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .usp-badge {
+            background: #1db954;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+        .album-card {
+            background-color: #181818;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .album-art {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #252525;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .album-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .album-desc {
+            font-size: 10px;
+            color: #b3b3b3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: #181818;
+            border-top: 1px solid #282828;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            z-index: 99999;
+        }
+    </style>
 </head>
 <body>
-<header><div class="brand">SOFFTY <span>LIVE</span> MUSIC HD</div><nav><a href="#home">Home</a><a href="#library">Music</a><a href="#studio">Studio</a></nav></header>
-<main>
-<section class="hero" id="home"><div class="tag">YOUR MUSIC • YOUR VIBE</div><h1>Feel The <span>Music</span></h1><p>SOFFTY LIVE MUSIC HD में आपका स्वागत है। अपने पसंदीदा गाने खोजें और सुनें। नई रिलीज़ और आपकी म्यूज़िक लाइब्रेरी एक ही जगह।</p><a href="#library"><button class="btn">Explore Music</button></a></section>
-<section id="library"><div class="section-head"><h2>Music Library</h2><span class="muted" id="count">0 songs</span></div><div class="tools"><input id="search" placeholder="गाना खोजें…" aria-label="Search songs"><select id="language"><option value="">सभी भाषाएँ</option><option>Hindi</option><option>Punjabi</option><option>English</option><option>Bhojpuri</option><option>Other</option></select><select id="sort"><option value="new">नए पहले</option><option value="az">नाम A–Z</option></select></div><div class="grid" id="songs"></div></section>
-<section class="player"><strong id="now">अभी कोई गाना नहीं चुना गया</strong><audio id="audio" controls preload="none"></audio></section>
-<section id="studio"><h2>Studio Manager</h2><details><summary>अपने डिवाइस से गाने जोड़ें</summary><p class="note">यह डेमो सुविधा गाने केवल इसी ब्राउज़र/डिवाइस में सेव करती है। GitHub Pages पर इससे गाने सभी visitors के लिए प्रकाशित नहीं होंगे। सार्वजनिक upload और shared admin panel के लिए अलग backend hosting की जरूरत होगी।</p><label>गाने का नाम<br><input id="songTitle" placeholder="Song title"></label><br><br><label>भाषा<br><select id="songLang"><option>Hindi</option><option>Punjabi</option><option>English</option><option>Bhojpuri</option><option>Other</option></select></label><br><br><label>Audio file<br><input id="songFile" type="file" accept="audio/*"></label><br><br><button class="btn" id="add">Add Song</button><p class="muted" id="status"></p></details></section>
-</main><footer>© <span id="year"></span> SOFFTY LIVE MUSIC HD</footer>
-<script>
-const DB='sofftyMusicDB', STORE='songs';let db;
-const req=indexedDB.open(DB,1);
-req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:'id',autoIncrement:true})};
-req.onsuccess=()=>{db=req.result;render()};
-req.onerror=()=>{document.getElementById('songs').innerHTML='<div class="empty">इस ब्राउज़र में local music storage उपलब्ध नहीं है।</div>'};
-const $=id=>document.getElementById(id);
-function allSongs(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
-async function render(){if(!db)return;let list=await allSongs();const q=$('search').value.toLowerCase(),lang=$('language').value,sort=$('sort').value;list=list.filter(s=>(s.title||'').toLowerCase().includes(q)&&(!lang||s.lang===lang));list.sort((a,b)=>sort==='az'?a.title.localeCompare(b.title):b.id-a.id);$('count').textContent=list.length+' songs';$('songs').innerHTML='';if(!list.length){$('songs').innerHTML='<div class="empty">अभी कोई गाना नहीं है। Studio Manager से अपना audio जोड़ें।</div>';return}list.forEach(s=>{const card=document.createElement('article');card.className='card';card.innerHTML='<div class="cover">♫</div><strong></strong><p class="muted"></p><button class="btn">Play</button>';card.querySelector('strong').textContent=s.title;card.querySelector('p').textContent=s.lang;card.querySelector('button').onclick=()=>play(s);$('songs').append(card)})}
-function play(s){const url=URL.createObjectURL(s.file);$('audio').src=url;$('now').textContent='Playing: '+s.title;$('audio').play().catch(()=>{})}
-$('add').onclick=async()=>{const title=$('songTitle').value.trim(),file=$('songFile').files[0];if(!title||!file){$('status').textContent='कृपया गाने का नाम और audio file चुनें।';return}if(!db){$('status').textContent='Storage तैयार नहीं है। पेज refresh करें।';return}const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).add({title,lang:$('songLang').value,file,created:Date.now()});tx.oncomplete=()=>{$('status').textContent='गाना इस डिवाइस में सेव हो गया।';$('songTitle').value='';$('songFile').value='';render()};tx.onerror=()=>{$('status').textContent='गाना सेव नहीं हो पाया।'}};
-['search','language','sort'].forEach(id=>$(id).addEventListener('input',render));$('year').textContent=new Date().getFullYear();
-</script>
-</body></html>
+
+    <div class="app-container">
+        <div class="main-content">
+            <div class="header">
+                <div class="usp-badge">SofftyLIVE Music HD - Live Now</div>
+            </div>
+
+            <div class="section-title">Music Categories</div>
+            <div class="album-grid">
+                <!-- 1. Official Launch -->
+                <div class="album-card">
+                    <div class="album-art">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=60" alt="Official Launch">
+                    </div>
+                    <div class="album-name">1. Official Launch</div>
+                    <div class="album-desc">Sejla Singh Special</div>
+                </div>
+
+                <!-- 2. Romantic Vibes -->
+                <div class="album-card">
+                    <div class="album-art">
+                        <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=500&auto=format&fit=crop&q=60" alt="Romantic Vibes">
+                    </div>
+                    <div class="album-name">2. Romantic Vibes</div>
+                    <div class="album-desc">Kannada Dhamaka</div>
+                </div>
+
+                <!-- 3. Very Sad / Breakup -->
+                <div class="album-card">
+                    <div class="album-art">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&auto=format&fit=crop&q=60" alt="Very Sad">
+                    </div>
+                    <div class="album-name">3. Very Sad / Breakup</div>
+                    <div class="album-desc">Heartbroken Melodies</div>
+                </div>
+
+                <!-- 4. Desi Bawandar -->
+                <div class="album-card">
+                    <div class="album-art">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&auto=format&fit=crop&q=60" alt="Desi Bawandar">
+                    </div>
+                    <div class="album-name">4. Desi Bawandar</div>
+                    <div class="album-desc">Golu Molu Group</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player -->
+    <div class="player">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 38px; height: 38px; background: #252525; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #1db954;"><i class="fa-solid fa-compact-disc"></i></div>
+            <div>
+                <div style="font-size: 12px; font-weight: bold; color: #fff;">Google ka Pyar</div>
+                <div style="font-size: 10px; color: #b3b3b3;">SofftyLIVE</div>
+            </div>
+        </div>
+        <div style="display: flex; gap: 15px; font-size: 18px; color: #fff;">
+            <i class="fa-solid fa-backward-step"></i>
+            <i class="fa-solid fa-circle-play" style="font-size: 22px; color: #1db954;"></i>
+            <i class="fa-solid fa-forward-step"></i>
+        </div>
+    </div>
+
+</body>
+  </html>
