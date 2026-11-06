@@ -4,521 +4,570 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SofftyLIVE Music HD | Emotions Ka Taj Mahal - Lucknow</title>
-    <style>
-        :root {
-            --primary: #ff3366;
-            --secondary: #7928ca;
-            --bg-dark: #0f111a;
-            --card-bg: #1a1d29;
-            --text-main: #ffffff;
-            --text-muted: #a0aec0;
-            --accent: #00ffcc;
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#0f111a',
+                        cardDark: '#161925',
+                        hoverDark: '#202436',
+                        accentPink: '#ff3366',
+                        accentPurple: '#7928ca',
+                        accentCyan: '#00ffcc',
+                    }
+                }
+            }
         }
-
-        /* Prevent Text & Media Selection */
+    </script>
+    <style>
+        /* Custom Scrollbar & Security Styles */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f111a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #202436;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff3366;
         }
 
-        /* Header */
-        header {
-            background: rgba(15, 17, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .brand-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tagline {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-left: 2px solid var(--primary);
-            padding-left: 10px;
-        }
-
-        /* Blockbuster Marquee Banner */
-        .marquee-wrapper {
-            background: linear-gradient(90deg, #ff3366, #7928ca, #ff3366);
-            color: #ffffff;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 12px 0;
-            box-shadow: 0 4px 15px rgba(255, 51, 102, 0.4);
-            border-bottom: 2px solid var(--accent);
-        }
-
-        .marquee-content {
+        .marquee-animation {
             display: inline-block;
             white-space: nowrap;
-            padding-left: 100%;
-            animation: scroll-left 20s linear infinite;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            animation: marquee 25s linear infinite;
         }
 
-        @keyframes scroll-left {
-            0% { transform: translateX(0%); }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
 
-        /* Main Container Layout */
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 360px;
-            gap: 20px;
-            padding: 20px;
-            max-width: 1440px;
-            margin: 0 auto;
-            width: 100%;
-            flex: 1;
-        }
-
-        @media (max-width: 968px) {
-            .container { grid-template-columns: 1fr; }
-        }
-
-        .main-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Secured Audio Player Component */
-        .audio-player-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .now-playing h3 {
-            font-size: 1.1rem;
-            color: var(--text-main);
-        }
-
-        .now-playing p {
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-top: 4px;
-        }
-
-        audio {
-            width: 100%;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        /* Hide download button in WebKit browsers */
-        audio::-internal-media-controls-download-button {
-            display: none;
-        }
-        audio::-webkit-media-controls-enclosure {
-            overflow: hidden;
-        }
-        audio::-webkit-media-controls-panel {
-            width: calc(100% + 30px);
-        }
-
-        /* Playlist Section */
-        .playlist-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
+        .glass-panel {
+            background: rgba(22, 25, 37, 0.75);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .playlist-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .song-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .song-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .song-item:hover {
-            background: rgba(255, 51, 102, 0.15);
-            border-left-color: var(--primary);
-        }
-
-        .song-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .song-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .song-category {
-            font-size: 0.75rem;
-            background: rgba(0, 255, 204, 0.15);
-            color: var(--accent);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .language-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .lang-tag {
-            font-size: 0.7rem;
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            padding: 2px 6px;
-            border-radius: 3px;
-        }
-
-        /* Social Windows */
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        @media (max-width: 768px) {
-            .social-grid { grid-template-columns: 1fr; }
-        }
-
-        .social-box {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            text-align: center;
-        }
-
-        .social-preview {
-            background: var(--bg-dark);
-            height: 100px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .social-preview a {
-            color: var(--accent);
-            text-decoration: none;
-            margin-top: 6px;
-            font-weight: bold;
-        }
-
-        /* Chat Sidebar */
-        .chat-sidebar {
-            background: var(--card-bg);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            height: 620px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .chat-header {
-            padding: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 16px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .chat-line { font-size: 0.88rem; }
-
-        .chat-user {
-            font-weight: bold;
-            color: var(--primary);
-            margin-right: 6px;
-        }
-
-        .chat-input-area {
-            padding: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            gap: 8px;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            background: var(--bg-dark);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 10px 14px;
-            border-radius: 8px;
-            color: white;
-            outline: none;
-            -webkit-user-select: text;
-            user-select: text;
-        }
-
-        .chat-input-area button {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border: none;
-            color: white;
-            padding: 0 16px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 16px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            margin-top: auto;
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.35);
         }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body class="bg-brandDark text-white font-sans antialiased min-h-screen flex flex-col pb-24" oncontextmenu="return false;">
 
-    <!-- Header -->
-    <header>
-        <div class="brand-logo">SofftyLIVE Music HD</div>
-        <div class="tagline">Emotions Ka Taj Mahal - Lucknow</div>
+    <!-- TOP NAV BAR -->
+    <header class="sticky top-0 z-50 glass-panel px-6 py-3 flex items-center justify-between">
+        <!-- Logo & Tagline -->
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-accentPink to-accentPurple flex items-center justify-center font-black text-xl shadow-lg shadow-accentPink/30">
+                    SL
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-accentPink via-accentPurple to-accentCyan bg-clip-text text-transparent">
+                        SOFFTYLIVE MUSIC HD
+                    </h1>
+                    <p class="text-xs text-gray-400 font-medium">Emotions Ka Taj Mahal - Lucknow</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Nav Links -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-gray-300">
+            <a href="#" class="text-accentPink hover:text-white transition">HOME</a>
+            <a href="#" class="hover:text-accentCyan transition">BROWSE</a>
+            <a href="#" class="hover:text-accentCyan transition">PLAYLISTS</a>
+            <a href="#" class="hover:text-accentCyan transition flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-accentPink animate-ping"></span> LIVE</a>
+            <a href="#" class="hover:text-accentCyan transition">ABOUT US</a>
+        </nav>
+
+        <!-- Search & Profile -->
+        <div class="flex items-center gap-4">
+            <div class="relative hidden sm:block">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                <input type="text" placeholder="Search tracks, genres..." class="bg-hoverDark text-xs text-white pl-9 pr-4 py-2 rounded-full border border-gray-700/50 focus:outline-none focus:border-accentPink w-48 md:w-64 transition">
+            </div>
+            <div class="w-9 h-9 rounded-full bg-gradient-to-r from-accentCyan to-accentPurple p-0.5 cursor-pointer">
+                <div class="w-full h-full bg-brandDark rounded-full flex items-center justify-center text-xs font-bold">
+                    RT
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- Blockbuster Moving Banner -->
-    <div class="marquee-wrapper">
-        <div class="marquee-content">
-            🔒 PROTECTED STREAMING &nbsp;&nbsp;&nbsp;&nbsp; 🔥 ALL-LANGUAGE MULTI-GENRE DROPS OUT NOW! &nbsp;&nbsp;&nbsp;&nbsp; 🎶 SOFFTYLIVE MUSIC HD 🔥
+    <!-- MARQUEE USP BANNER -->
+    <div class="bg-gradient-to-r from-accentPink via-accentPurple to-accentPink text-white text-xs font-bold py-2 overflow-hidden shadow-md shadow-accentPink/20">
+        <div class="marquee-animation flex items-center gap-12">
+            <span>🚀 USP: ONLY 100% ORIGINAL HD TRACKS - IN-HOUSE PRODUCTION</span>
+            <span>🔥 CATEGORIES: TECH WORLD CHHAMCHHAM • ROMANTIC TRIGGER • BREAKUP STORM • SHOOTOUT MELODY • DESI BAWANDAR</span>
+            <span>🎧 LANGUAGES: BHOJPURI • HINDI • DESI FUSION • LUCKNOWI RAP</span>
+            <span>🔒 100% PROTECTED HIGH DEFINITION AUDIO STREAMING</span>
         </div>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
-        <div class="main-panel">
+    <!-- MAIN BODY CONTAINER -->
+    <main class="max-w-7xl mx-auto w-full px-4 md:px-6 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6 flex-1">
+        
+        <!-- LEFT 3-COLUMNS: MUSIC DISCOVERY & PLAYLISTS -->
+        <div class="lg:col-span-3 space-y-8">
             
-            <!-- Protected Audio Player -->
-            <div class="audio-player-card">
-                <div class="player-info">
-                    <div class="now-playing">
-                        <h3 id="currentSongTitle">Tech World Chhamchham (Title Track)</h3>
-                        <p id="currentArtist">Category: Tech World Chhamchham • Protected Playback</p>
+            <!-- HERO BRAND SHOWCASE -->
+            <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-cardDark via-hoverDark to-brandDark p-8 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 glow-effect transition duration-500">
+                <div class="space-y-4 text-center md:text-left z-10">
+                    <span class="px-3 py-1 bg-accentPink/20 text-accentPink text-xs font-bold rounded-full border border-accentPink/30 inline-block">
+                        OFFICIAL BRAND LABEL
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+                        SOFFTYLIVE MUSIC <span class="text-accentCyan">HD</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm max-w-md">
+                        Experience exclusive, 100% in-house produced HD tracks crafted with pure emotions right from Lucknow.
+                    </p>
+                    <div class="flex items-center justify-center md:justify-start gap-4 pt-2">
+                        <button onclick="playTrack(0)" class="bg-gradient-to-r from-accentPink to-accentPurple text-white px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition shadow-lg shadow-accentPink/30 flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> Play Latest Drops
+                        </button>
+                        <button class="border border-gray-600 text-gray-300 px-5 py-2.5 rounded-full font-bold text-sm hover:border-accentCyan hover:text-accentCyan transition">
+                            Explore Catalogue
+                        </button>
                     </div>
                 </div>
-                <!-- controlsList="nodownload" disables standard download options -->
-                <audio id="mainAudioControls" controls controlsList="nodownload" oncontextmenu="return false;">
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                    Browser does not support protected audio.
-                </audio>
+
+                <!-- Big Visual Emblem Badge -->
+                <div class="relative w-48 h-48 rounded-2xl bg-gradient-to-tr from-accentPink/20 to-accentCyan/20 border border-white/10 flex flex-col items-center justify-center p-4 text-center group cursor-pointer">
+                    <div class="text-5xl text-accentPink mb-2 group-hover:scale-110 transition duration-300">
+                        <i class="fa-solid fa-compact-disc animate-spin" style="animation-duration: 10s;"></i>
+                    </div>
+                    <span class="text-xs font-black tracking-widest text-white">100% ORIGINAL</span>
+                    <span class="text-[10px] text-accentCyan uppercase tracking-wider">In-House HD Audio</span>
+                </div>
             </div>
 
-            <!-- Playlist -->
-            <div class="playlist-card">
-                <h3>🎵 Secured Catalogue (Protected Stream)</h3>
-                <ul class="song-list">
-                    <li class="song-item" onclick="playTrack('Tech World Chhamchham', 'Tech World Chhamchham', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
-                        <div class="song-header">
-                            <span class="song-title">1. Tech World Chhamchham</span>
-                            <span class="song-category">Tech World Chhamchham</span>
-                        </div>
-                        <div class="language-tags">
-                            <span class="lang-tag">🌐 All Languages</span>
-                            <span class="lang-tag">Bhojpuri</span>
-                            <span class="lang-tag">Hindi</span>
-                            <span class="lang-tag">Tech-Fusion</span>
-                        </div>
-                    </li>
+            <!-- CURATED PLAYLIST GRID -->
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-accentPink"></i> Curated Categories & Albums
+                    </h3>
+                    <a href="#" class="text-xs text-accentCyan hover:underline font-bold">See All</a>
+                </div>
 
-                    <li class="song-item" onclick="playTrack('Romantic Trigger (Dil Ka Connection)', 'Romantic Trigger', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
-                        <div class="song-header">
-                            <span class="song-title">2. Romantic Trigger (Dil Ka Connection)</span>
-                            <span class="song-category">Romantic Trigger</span>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <!-- Category 1 -->
+                    <div onclick="playTrack(0)" class="bg-cardDark p-3.5 rounded-xl border border-white/5 hover:border-accentPink/40 transition group cursor-pointer hover:bg-hoverDark">
+                        <div class="relative aspect-square rounded-lg bg-gradient-to-br from-purple-900 to-indigo-900 mb-3 overflow-hidden flex items-center justify-center">
+                            <i class="fa-solid fa-microchip text-4xl text-accentCyan group-hover:scale-110 transition"></i>
+                            <div class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-accentPink flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-md">
+                                <i class="fa-solid fa-play text-xs text-white"></i>
+                            </div>
                         </div>
-                        <div class="language-tags">
-                            <span class="lang-tag">🌐 All Languages</span>
-                            <span class="lang-tag">Hindi</span>
-                            <span class="lang-tag">Bhojpuri Romantic</span>
-                        </div>
-                    </li>
+                        <h4 class="text-sm font-bold truncate">Tech World Chhamchham</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Bhojpuri • Tech Fusion</p>
+                    </div>
 
-                    <li class="song-item" onclick="playTrack('Breakup Storm (Dil Toota Network Out)', 'Breakup Storm', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
-                        <div class="song-header">
-                            <span class="song-title">3. Breakup Storm (Dil Toota Network Out)</span>
-                            <span class="song-category">Breakup Storm</span>
+                    <!-- Category 2 -->
+                    <div onclick="playTrack(1)" class="bg-cardDark p-3.5 rounded-xl border border-white/5 hover:border-accentPink/40 transition group cursor-pointer hover:bg-hoverDark">
+                        <div class="relative aspect-square rounded-lg bg-gradient-to-br from-pink-900 to-rose-900 mb-3 overflow-hidden flex items-center justify-center">
+                            <i class="fa-solid fa-heart text-4xl text-accentPink group-hover:scale-110 transition"></i>
+                            <div class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-accentPink flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-md">
+                                <i class="fa-solid fa-play text-xs text-white"></i>
+                            </div>
                         </div>
-                        <div class="language-tags">
-                            <span class="lang-tag">🌐 All Languages</span>
-                            <span class="lang-tag">Bhojpuri Sad</span>
-                            <span class="lang-tag">Hindi Heartbreak</span>
-                        </div>
-                    </li>
+                        <h4 class="text-sm font-bold truncate">Romantic Trigger</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Hindi • Love Ballads</p>
+                    </div>
 
-                    <li class="song-item" onclick="playTrack('Shootout Melody (Lucknow Underworld)', 'Shootout Melody', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
-                        <div class="song-header">
-                            <span class="song-title">4. Shootout Melody (Lucknow Underworld)</span>
-                            <span class="song-category">Shootout Melody</span>
+                    <!-- Category 3 -->
+                    <div onclick="playTrack(2)" class="bg-cardDark p-3.5 rounded-xl border border-white/5 hover:border-accentPink/40 transition group cursor-pointer hover:bg-hoverDark">
+                        <div class="relative aspect-square rounded-lg bg-gradient-to-br from-blue-900 to-slate-900 mb-3 overflow-hidden flex items-center justify-center">
+                            <i class="fa-solid fa-cloud-showers-heavy text-4xl text-blue-400 group-hover:scale-110 transition"></i>
+                            <div class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-accentPink flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-md">
+                                <i class="fa-solid fa-play text-xs text-white"></i>
+                            </div>
                         </div>
-                        <div class="language-tags">
-                            <span class="lang-tag">🌐 All Languages</span>
-                            <span class="lang-tag">Hindi Attitude</span>
-                            <span class="lang-tag">Lucknowi Rap</span>
-                        </div>
-                    </li>
+                        <h4 class="text-sm font-bold truncate">Breakup Storm</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Bhojpuri Sad • Melancholy</p>
+                    </div>
 
-                    <li class="song-item" onclick="playTrack('Desi Bawandar (High-Energy Fun)', 'Desi Bawandar', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3')">
-                        <div class="song-header">
-                            <span class="song-title">5. Desi Bawandar (High-Energy Fun)</span>
-                            <span class="song-category">Desi Bawandar</span>
+                    <!-- Category 4 -->
+                    <div onclick="playTrack(3)" class="bg-cardDark p-3.5 rounded-xl border border-white/5 hover:border-accentPink/40 transition group cursor-pointer hover:bg-hoverDark">
+                        <div class="relative aspect-square rounded-lg bg-gradient-to-br from-red-950 to-amber-950 mb-3 overflow-hidden flex items-center justify-center">
+                            <i class="fa-solid fa-gun text-4xl text-amber-500 group-hover:scale-110 transition"></i>
+                            <div class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-accentPink flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-md">
+                                <i class="fa-solid fa-play text-xs text-white"></i>
+                            </div>
                         </div>
-                        <div class="language-tags">
-                            <span class="lang-tag">🌐 All Languages</span>
-                            <span class="lang-tag">Bhojpuri Pop</span>
-                            <span class="lang-tag">Desi Party</span>
+                        <h4 class="text-sm font-bold truncate">Shootout Melody</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Lucknowi Rap • Attitude</p>
+                    </div>
+
+                    <!-- Category 5 -->
+                    <div onclick="playTrack(4)" class="bg-cardDark p-3.5 rounded-xl border border-white/5 hover:border-accentPink/40 transition group cursor-pointer hover:bg-hoverDark">
+                        <div class="relative aspect-square rounded-lg bg-gradient-to-br from-emerald-900 to-teal-950 mb-3 overflow-hidden flex items-center justify-center">
+                            <i class="fa-solid fa-bolt text-4xl text-accentCyan group-hover:scale-110 transition"></i>
+                            <div class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-accentPink flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-md">
+                                <i class="fa-solid fa-play text-xs text-white"></i>
+                            </div>
                         </div>
-                    </li>
-                </ul>
+                        <h4 class="text-sm font-bold truncate">Desi Bawandar</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Desi Pop • Party Beats</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Social Media Windows -->
-            <div class="social-grid">
-                <div class="social-box">
-                    <h4 style="color: #ff0000;">YouTube Feed</h4>
-                    <div class="social-preview">
-                        <span>Shorts & Videos</span>
-                        <a href="https://youtube.com/@sofftylive" target="_blank">@sofftylive</a>
+            <!-- SONG LIST TABLE -->
+            <div class="bg-cardDark rounded-xl p-5 border border-white/5">
+                <h3 class="text-lg font-extrabold text-white mb-4 flex items-center justify-between">
+                    <span>🎵 Featured Track Catalogue</span>
+                    <span class="text-xs text-gray-400 font-normal">5 Active HD Streams</span>
+                </h3>
+
+                <div class="space-y-2">
+                    <!-- Track Item 1 -->
+                    <div onclick="playTrack(0)" class="flex items-center justify-between p-3 rounded-lg hover:bg-hoverDark transition cursor-pointer border border-transparent hover:border-white/10 group">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-accentPink w-4 text-center">01</span>
+                            <div class="w-10 h-10 rounded bg-purple-900/50 flex items-center justify-center text-accentCyan">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold group-hover:text-accentPink transition">Tech World Chhamchham</h5>
+                                <div class="flex gap-1.5 mt-1">
+                                    <span class="text-[10px] bg-accentPink/15 text-accentPink px-2 py-0.5 rounded font-semibold">Bhojpuri</span>
+                                    <span class="text-[10px] bg-accentPurple/20 text-purple-300 px-2 py-0.5 rounded font-semibold">Tech-Fusion</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400 font-mono">03:45</div>
                     </div>
-                </div>
-                <div class="social-box">
-                    <h4 style="color: #e1306c;">Instagram Feed</h4>
-                    <div class="social-preview">
-                        <span>Latest Reels</span>
-                        <a href="https://instagram.com/sofftylive" target="_blank">@sofftylive</a>
+
+                    <!-- Track Item 2 -->
+                    <div onclick="playTrack(1)" class="flex items-center justify-between p-3 rounded-lg hover:bg-hoverDark transition cursor-pointer border border-transparent hover:border-white/10 group">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-accentPink w-4 text-center">02</span>
+                            <div class="w-10 h-10 rounded bg-pink-900/50 flex items-center justify-center text-accentPink">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold group-hover:text-accentPink transition">Romantic Trigger (Dil Ka Connection)</h5>
+                                <div class="flex gap-1.5 mt-1">
+                                    <span class="text-[10px] bg-accentPink/15 text-accentPink px-2 py-0.5 rounded font-semibold">Hindi</span>
+                                    <span class="text-[10px] bg-accentCyan/15 text-accentCyan px-2 py-0.5 rounded font-semibold">Bhojpuri Romantic</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400 font-mono">04:12</div>
                     </div>
-                </div>
-                <div class="social-box">
-                    <h4 style="color: #1da1f2;">Twitter (X) Feed</h4>
-                    <div class="social-preview">
-                        <span>Announcements</span>
-                        <a href="https://x.com/sofftylive" target="_blank">@sofftylive</a>
+
+                    <!-- Track Item 3 -->
+                    <div onclick="playTrack(2)" class="flex items-center justify-between p-3 rounded-lg hover:bg-hoverDark transition cursor-pointer border border-transparent hover:border-white/10 group">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-accentPink w-4 text-center">03</span>
+                            <div class="w-10 h-10 rounded bg-blue-900/50 flex items-center justify-center text-blue-400">
+                                <i class="fa-solid fa-cloud-rain"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold group-hover:text-accentPink transition">Breakup Storm (Dil Toota Network Out)</h5>
+                                <div class="flex gap-1.5 mt-1">
+                                    <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded font-semibold">Bhojpuri Sad</span>
+                                    <span class="text-[10px] bg-accentPink/15 text-accentPink px-2 py-0.5 rounded font-semibold">Hindi Heartbreak</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400 font-mono">03:58</div>
+                    </div>
+
+                    <!-- Track Item 4 -->
+                    <div onclick="playTrack(3)" class="flex items-center justify-between p-3 rounded-lg hover:bg-hoverDark transition cursor-pointer border border-transparent hover:border-white/10 group">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-accentPink w-4 text-center">04</span>
+                            <div class="w-10 h-10 rounded bg-amber-900/50 flex items-center justify-center text-amber-500">
+                                <i class="fa-solid fa-fire text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold group-hover:text-accentPink transition">Shootout Melody (Lucknow Underworld)</h5>
+                                <div class="flex gap-1.5 mt-1">
+                                    <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-semibold">Lucknowi Rap</span>
+                                    <span class="text-[10px] bg-accentCyan/15 text-accentCyan px-2 py-0.5 rounded font-semibold">Desi Attitude</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400 font-mono">03:20</div>
+                    </div>
+
+                    <!-- Track Item 5 -->
+                    <div onclick="playTrack(4)" class="flex items-center justify-between p-3 rounded-lg hover:bg-hoverDark transition cursor-pointer border border-transparent hover:border-white/10 group">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-bold text-gray-500 group-hover:text-accentPink w-4 text-center">05</span>
+                            <div class="w-10 h-10 rounded bg-emerald-900/50 flex items-center justify-center text-accentCyan">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold group-hover:text-accentPink transition">Desi Bawandar (High-Energy Fun)</h5>
+                                <div class="flex gap-1.5 mt-1">
+                                    <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-semibold">Bhojpuri Pop</span>
+                                    <span class="text-[10px] bg-accentPink/15 text-accentPink px-2 py-0.5 rounded font-semibold">Party Beats</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400 font-mono">04:05</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Right Chat Panel -->
-        <div class="chat-sidebar">
-            <div class="chat-header">
-                <span>Live Audience Chat</span>
-                <span style="font-size: 0.8rem; color: #00ffcc;">● Live</span>
+        <!-- RIGHT 1-COLUMN: COMMUNITY LIVE CHAT & SOCIAL HUBS -->
+        <div class="space-y-6">
+            
+            <!-- LIVE CHAT PANEL -->
+            <div class="bg-cardDark rounded-xl border border-white/5 flex flex-col h-[480px]">
+                <div class="p-4 border-b border-white/5 flex items-center justify-between">
+                    <h4 class="font-extrabold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-accentCyan"></i> Live Fan Chat
+                    </h4>
+                    <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
+                    </span>
+                </div>
+
+                <!-- Chat Feed -->
+                <div id="chatFeed" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
+                    <div class="bg-hoverDark p-2.5 rounded-lg border border-white/5">
+                        <span class="font-bold text-accentPink">SofftyOfficial:</span>
+                        <p class="text-gray-300 mt-0.5">Welcome to SofftyLIVE Music HD! Pure 100% Original HD Tracks online! ✨</p>
+                    </div>
+                    <div class="bg-hoverDark p-2.5 rounded-lg border border-white/5">
+                        <span class="font-bold text-accentCyan">Lucknow_Rider:</span>
+                        <p class="text-gray-300 mt-0.5">Shootout Melody track ki beat ekdam next-level hai bhai! 🔥</p>
+                    </div>
+                    <div class="bg-hoverDark p-2.5 rounded-lg border border-white/5">
+                        <span class="font-bold text-purple-400">CryptoNitin:</span>
+                        <p class="text-gray-300 mt-0.5">UI ekdam Spotify jaisa premium lag raha hai 👌</p>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="p-3 border-t border-white/5 flex gap-2">
+                    <input type="text" id="chatInput" placeholder="Join the live chat..." class="flex-1 bg-brandDark text-xs text-white px-3 py-2 rounded-lg border border-gray-700/50 focus:outline-none focus:border-accentPink">
+                    <button onclick="sendChatMessage()" class="bg-gradient-to-r from-accentPink to-accentPurple text-white px-4 py-2 rounded-lg font-bold text-xs hover:opacity-90 transition">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
             </div>
-            <div class="chat-messages" id="chatBox">
-                <div class="chat-line"><span class="chat-user">SofftyOfficial:</span> Protected Player Enabled! ✨</div>
+
+            <!-- SOCIAL LINKS CARD -->
+            <div class="bg-cardDark p-4 rounded-xl border border-white/5 space-y-3">
+                <h4 class="font-bold text-xs text-gray-400 uppercase tracking-wider">Official Handles</h4>
+                <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                    <a href="https://youtube.com/@sofftylive" target="_blank" class="p-2.5 bg-hoverDark rounded-lg hover:text-red-500 transition border border-white/5">
+                        <i class="fa-brands fa-youtube text-lg mb-1 block text-red-500"></i> YouTube
+                    </a>
+                    <a href="https://instagram.com/sofftylive" target="_blank" class="p-2.5 bg-hoverDark rounded-lg hover:text-pink-500 transition border border-white/5">
+                        <i class="fa-brands fa-instagram text-lg mb-1 block text-pink-500"></i> Insta
+                    </a>
+                    <a href="https://x.com/sofftylive" target="_blank" class="p-2.5 bg-hoverDark rounded-lg hover:text-sky-400 transition border border-white/5">
+                        <i class="fa-brands fa-x-twitter text-lg mb-1 block text-sky-400"></i> Twitter
+                    </a>
+                </div>
             </div>
-            <div class="chat-input-area">
-                <input type="text" id="msgInput" placeholder="Send a message..." onkeypress="checkEnter(event)">
-                <button onclick="sendMsg()">Send</button>
+
+        </div>
+
+    </main>
+
+    <!-- FIXED BOTTOM SPOTIFY-STYLE AUDIO PLAYER -->
+    <footer class="fixed bottom-0 left-0 right-0 glass-panel border-t border-white/10 px-4 md:px-8 py-3 flex items-center justify-between z-50">
+        
+        <!-- Track Info -->
+        <div class="flex items-center gap-3 w-1/4">
+            <div class="w-12 h-12 rounded-lg bg-gradient-to-tr from-accentPink to-accentPurple flex items-center justify-center text-white text-lg shadow-md">
+                <i class="fa-solid fa-music"></i>
+            </div>
+            <div class="hidden sm:block truncate">
+                <h6 id="playerTitle" class="text-sm font-bold text-white truncate">Tech World Chhamchham</h6>
+                <p id="playerSubtitle" class="text-xs text-accentCyan truncate">Category: Tech World Chhamchham</p>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <footer>
-        &copy; 2026 SofftyLIVE Music. All Rights Reserved. Created by Rajesh Tewari.
+        <!-- Custom Controls & Progress Bar -->
+        <div class="flex flex-col items-center gap-1 w-2/4 max-w-xl">
+            <!-- Buttons -->
+            <div class="flex items-center gap-6">
+                <button onclick="prevTrack()" class="text-gray-400 hover:text-white transition"><i class="fa-solid fa-backward-step text-sm"></i></button>
+                <button onclick="togglePlay()" id="playBtn" class="w-9 h-9 rounded-full bg-white text-brandDark flex items-center justify-center hover:scale-105 transition shadow-lg">
+                    <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                </button>
+                <button onclick="nextTrack()" class="text-gray-400 hover:text-white transition"><i class="fa-solid fa-forward-step text-sm"></i></button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full flex items-center gap-3 text-[11px] text-gray-400 font-mono">
+                <span id="currentTime">0:00</span>
+                <input type="range" id="seekSlider" value="0" max="100" class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accentPink">
+                <span id="duration">03:45</span>
+            </div>
+        </div>
+
+        <!-- Hidden Audio Engine with Security attributes -->
+        <audio id="audioEngine" controlsList="nodownload" oncontextmenu="return false;">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Right Volume & Security Badge -->
+        <div class="flex items-center justify-end gap-3 w-1/4 text-xs">
+            <span class="hidden md:inline-flex items-center gap-1 px-2.5 py-1 bg-accentPink/10 text-accentPink rounded border border-accentPink/20 text-[10px] font-bold">
+                <i class="fa-solid fa-shield-halved"></i> 100% PROTECTED
+            </span>
+            <i class="fa-solid fa-volume-high text-gray-400"></i>
+            <input type="range" id="volumeSlider" value="80" max="100" class="w-20 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-accentCyan">
+        </div>
     </footer>
 
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
-        // Disable Keyboard Inspection Shortcuts
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) return false; // Block F12
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U (View Source)
-            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; // Ctrl+S (Save Page)
-        };
+        const tracks = [
+            {
+                title: "Tech World Chhamchham",
+                category: "Tech World Chhamchham",
+                tags: "Bhojpuri • Tech Fusion",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                duration: "03:45"
+            },
+            {
+                title: "Romantic Trigger (Dil Ka Connection)",
+                category: "Romantic Trigger",
+                tags: "Hindi • Love Ballads",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                duration: "04:12"
+            },
+            {
+                title: "Breakup Storm (Dil Toota Network Out)",
+                category: "Breakup Storm",
+                tags: "Bhojpuri Sad • Melancholy",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                duration: "03:58"
+            },
+            {
+                title: "Shootout Melody (Lucknow Underworld)",
+                category: "Shootout Melody",
+                tags: "Lucknowi Rap • Attitude",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                duration: "03:20"
+            },
+            {
+                title: "Desi Bawandar (High-Energy Fun)",
+                category: "Desi Bawandar",
+                tags: "Desi Pop • Party Beats",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                duration: "04:05"
+            }
+        ];
 
-        function sendMsg() {
-            const input = document.getElementById('msgInput');
-            const chatBox = document.getElementById('chatBox');
-            if (input.value.trim() !== '') {
-                const line = document.createElement('div');
-                line.className = 'chat-line';
-                line.innerHTML = `<span class="chat-user" style="color: #00ffcc;">You:</span> ${input.value}`;
-                chatBox.appendChild(line);
-                input.value = '';
-                chatBox.scrollTop = chatBox.scrollHeight;
+        let currentTrackIndex = 0;
+        const audio = document.getElementById('audioEngine');
+        const playBtn = document.getElementById('playBtn');
+        const playerTitle = document.getElementById('playerTitle');
+        const playerSubtitle = document.getElementById('playerSubtitle');
+        const seekSlider = document.getElementById('seekSlider');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        function playTrack(index) {
+            currentTrackIndex = index;
+            const track = tracks[index];
+            playerTitle.innerText = track.title;
+            playerSubtitle.innerText = `Category: ${track.category} • ${track.tags}`;
+            durationSpan.innerText = track.duration;
+            audio.src = track.url;
+            audio.play();
+            playBtn.innerHTML = '<i class="fa-solid fa-pause text-sm"></i>';
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fa-solid fa-pause text-sm"></i>';
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fa-solid fa-play text-sm ml-0.5"></i>';
             }
         }
 
-        function checkEnter(e) {
-            if (e.key === 'Enter') sendMsg();
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            playTrack(currentTrackIndex);
         }
 
-        function playTrack(title, category, url) {
-            document.getElementById('currentSongTitle').innerText = title;
-            document.getElementById('currentArtist').innerText = 'Category: ' + category + ' • Stream Locked';
-            const audio = document.getElementById('mainAudioControls');
-            audio.src = url;
-            audio.play();
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+            playTrack(currentTrackIndex);
         }
+
+        // Update Slider Progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                seekSlider.value = progress;
+                
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeSpan.innerText = `${mins}:${secs}`;
+            }
+        });
+
+        seekSlider.addEventListener('input', () => {
+            if (audio.duration) {
+                audio.currentTime = (seekSlider.value / 100) * audio.duration;
+            }
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value / 100;
+        });
+
+        // Chat Box Functionality
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const feed = document.getElementById('chatFeed');
+            if (input.value.trim() !== '') {
+                const msg = document.createElement('div');
+                msg.className = 'bg-hoverDark p-2.5 rounded-lg border border-white/5';
+                msg.innerHTML = `<span class="font-bold text-accentCyan">You:</span><p class="text-gray-300 mt-0.5">${input.value}</p>`;
+                feed.appendChild(msg);
+                input.value = '';
+                feed.scrollTop = feed.scrollHeight;
+            }
+        }
+
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendChatMessage();
+        });
+
+        // Developer Mode & Security Blockers
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false; // F12
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67 || e.keyCode == 74)) return false; // Ctrl+Shift+I/C/J
+            if(e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83)) return false; // Ctrl+U / Ctrl+S
+        };
     </script>
 </body>
 </html>
