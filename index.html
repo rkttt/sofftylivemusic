@@ -65,8 +65,8 @@
         .main-content {
             flex: 1;
             background: linear-gradient(to bottom, #1f1f1f, #121212);
-            padding: 25px;
-            padding-bottom: 120px;
+            padding: 20px;
+            padding-bottom: 130px;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -74,7 +74,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 15px;
         }
@@ -101,45 +101,50 @@
         .section-title {
             font-size: 20px;
             font-weight: bold;
+            color: #ffffff;
             margin-bottom: 15px;
-            margin-top: 15px;
+            margin-top: 10px;
         }
         .album-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             width: 100%;
         }
         .album-card {
             background-color: #181818;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
-        }
-        .album-card:hover {
-            background-color: #282828;
         }
         .album-art {
             width: 100%;
-            height: 130px;
+            aspect-ratio: 1 / 1;
             background-color: #252525;
             border-radius: 6px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: #1db954;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .album-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
-            margin-bottom: 5px;
+            color: #ffffff;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .album-desc {
             font-size: 11px;
             color: #b3b3b3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         /* Bottom Player */
         .player {
@@ -147,26 +152,27 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 90px;
+            height: 85px;
             background-color: #181818;
             border-top: 1px solid #282828;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            z-index: 9999;
+            padding: 0 15px;
+            z-index: 99999;
         }
         
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .sidebar {
-                display: none; /* Hide sidebar on small mobile to prevent sliding */
+                display: none;
             }
             .main-content {
-                padding: 15px;
+                padding: 12px;
+                padding-bottom: 120px;
             }
             .album-grid {
-                grid-template-columns: repeat(2, 1fr); /* Exactly 2 cards per row on mobile for clean look */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
         }
@@ -190,40 +196,49 @@
         <!-- Main Content Area -->
         <div class="main-content">
             <div class="header">
-                <div class="usp-badge">100% Original HD Tracks, In-House Production</div>
+                <div class="usp-badge">SofftyLIVE Music HD - Launch Ready</div>
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-youtube"></i></a>
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
                 </div>
             </div>
 
-            <div class="section-title">Music Albums & Categories</div>
+            <div class="section-title">Music Categories</div>
             <div class="album-grid">
+                <!-- 1. Official Launch -->
                 <div class="album-card">
-                    <div class="album-art"><i class="fa-solid fa-microchip"></i></div>
-                    <div class="album-name">1. Tech Beats</div>
-                    <div class="album-desc">Future Tech Sounds</div>
+                    <div class="album-art">
+                        <img src="1000451263_d7a207.jpg" alt="Official Launch">
+                    </div>
+                    <div class="album-name">1. Official Launch</div>
+                    <div class="album-desc">Sejla Singh Special</div>
                 </div>
+
+                <!-- 2. Romantic Vibes -->
                 <div class="album-card">
-                    <div class="album-art"><i class="fa-solid fa-heart"></i></div>
+                    <div class="album-art">
+                        <img src="1000446667_d7a207.jpg" alt="Romantic Vibes">
+                    </div>
                     <div class="album-name">2. Romantic Vibes</div>
-                    <div class="album-desc">Love & Emotion</div>
+                    <div class="album-desc">Kannada Dhamaka</div>
                 </div>
+
+                <!-- 3. Very Sad / Breakup -->
                 <div class="album-card">
-                    <div class="album-art"><i class="fa-solid fa-heart-crack"></i></div>
+                    <div class="album-art">
+                        <img src="1000442352_d7a207.jpg" alt="Very Sad">
+                    </div>
                     <div class="album-name">3. Very Sad / Breakup</div>
                     <div class="album-desc">Heartbroken Melodies</div>
                 </div>
+
+                <!-- 4. Desi Bawandar -->
                 <div class="album-card">
-                    <div class="album-art"><i class="fa-solid fa-gun"></i></div>
-                    <div class="album-name">4. Shoot Out</div>
-                    <div class="album-desc">High Energy Beats</div>
-                </div>
-                <div class="album-card">
-                    <div class="album-art"><_div class="album-art"><i class="fa-solid fa-drum"></i></div>
-                    <div class="album-name">5. Desi Bawandar</div>
-                    <div class="album-desc">Traditional Acoustic Pop</div>
+                    <div class="album-art">
+                        <img src="1000449579_d7a207.jpg" alt="Desi Bawandar">
+                    </div>
+                    <div class="album-name">4. Desi Bawandar</div>
+                    <div class="album-desc">Golu Molu Group</div>
                 </div>
             </div>
         </div>
@@ -231,20 +246,20 @@
 
     <!-- Fixed Bottom Player -->
     <div class="player">
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 45px; height: 45px; background: #252525; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #1db954;"><i class="fa-solid fa-compact-disc"></i></div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 40px; height: 40px; background: #252525; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #1db954;"><i class="fa-solid fa-compact-disc"></i></div>
             <div>
-                <div style="font-size: 13px; font-weight: bold;">Google ka Pyar</div>
-                <div style="font-size: 11px; color: #b3b3b3;">SofftyLIVE Music HD</div>
+                <div style="font-size: 12px; font-weight: bold; color: #fff;">Google ka Pyar</div>
+                <div style="font-size: 10px; color: #b3b3b3;">SofftyLIVE</div>
             </div>
         </div>
         <div style="display: flex; gap: 15px; font-size: 18px; cursor: pointer; color: #fff;">
             <i class="fa-solid fa-backward-step"></i>
-            <i class="fa-solid fa-circle-play" style="font-size: 24px; color: #1db954;"></i>
+            <i class="fa-solid fa-circle-play" style="font-size: 22px; color: #1db954;"></i>
             <i class="fa-solid fa-forward-step"></i>
         </div>
-        <div style="width: 80px;"></div>
+        <div style="width: 50px;"></div>
     </div>
 
 </body>
-                </html>
+                    </html>
